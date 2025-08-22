@@ -1,16 +1,20 @@
 #ifndef __SERIAL_H
 #define __SERIAL_H
 
-
+#include <string.h>
+#include <stdlib.h>
 #include "stm32f4xx_ll_gpio.h"
 #include "stm32f4xx_ll_dma.h"
 #include "stm32f4xx_ll_usart.h"
 #include "main.h"
+#include "boardfile.h"
+#include "dma.h"
 
+#define UART_BUFFER_TX_SIZE 1024
+#define UART_BUFFER_RX_SIZE 1024
+#define UART_MIN_BUFFER 128
+#define SERIAL_LIST_SIZE 5
 
-#define UART_BUFFER_TX_SIZE 128
-#define UART_BUFFER_RX_SIZE 128
-#define SERIAL_LIST_SIZE 200
 
 typedef struct{
    uint8_t* data;

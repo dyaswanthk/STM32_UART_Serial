@@ -7,11 +7,11 @@ void main(void)
 {
   size = strlen(serialTxBuffer);
   clockInit();
-  serialPort6 = serialOpen(USART6, 6, 57600, 0, 0, 0, RxCallBack, 0);
+  serialPort1 = serialOpen(USART1, 1, 57600, 0, 0, 0, RxCallBack, 0);
   timer2Init();
   while(1)
   {
-    serialProcessRx(serialPort6);
+    serialProcessRx(serialPort1);
   }
 }
 
@@ -20,9 +20,8 @@ void TIM2_IRQHandler(void)
   if(TIM2->SR & TIM_SR_UIF)
   {
     TIM2->SR &= ~TIM_SR_UIF;
-    serialScheduleTx(serialPort6,serialTxBuffer,size,SERIAL_NOTICE_MESSAGE);
-    //serialTx(serialPort6, serialTxBuffer, size);
-    serialSendListItem(serialPort6);
+    serialScheduleTx(serialPort1,serialTxBuffer,size,SERIAL_NOTICE_MESSAGE);
+    serialSendListItem(serialPort1);
     //debug_printf("hi");
   }    
 }

@@ -61,10 +61,10 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="136" useTextEdit="1" openedFrom="D:/Unmanned Dynamics/serialtestcode/main.c" path="serial.c" left="0" top="129" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="2" useTextEdit="1" path="boardfile.h" left="0" top="2" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="86" y="17" useTextEdit="1" path="boardfile.c" left="0" top="5" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="38" y="96" useTextEdit="1" path="clock_init.c" left="0" top="69" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="103" useTextEdit="1" openedFrom="D:/Unmanned Dynamics/serialtestcode/main.c" path="serial.c" left="0" top="96" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="5" useTextEdit="1" path="boardfile.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="14" useTextEdit="1" path="boardfile.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="38" y="96" useTextEdit="1" path="clock_init.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="clock_init.h" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="21" useTextEdit="1" path="timer.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="22" y="3" useTextEdit="1" path="timer.h" left="0" top="0" codecName="Default"/>
@@ -73,9 +73,9 @@
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="992" useTextEdit="1" openedFrom="D:/Unmanned Dynamics/serialtestcode/serial.c" path="inc/stm32f4xx_ll_dma.h" left="0" top="984" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="265" useTextEdit="1" path="C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 4.10/source/thumb_crt0.s" left="0" top="257" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="16" y="3" useTextEdit="1" openedFrom="D:/Unmanned Dynamics/serialtestcode/main.c" path="main.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="62" y="83" useTextEdit="1" openedFrom="D:/Unmanned Dynamics/serialtestcode/serial.c" path="serial.h" left="0" top="60" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="16" useTextEdit="1" openedFrom="D:/Unmanned Dynamics/serialtestcode/serial.c" path="serial.h" left="0" top="5" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="90" useTextEdit="1" path="C:/Users/admin/AppData/Local/Rowley Associates Limited/CrossWorks for ARM/v4/packages/targets/STM32/STM32_Startup.s" left="0" top="83" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="60" useTextEdit="1" path="dma.c" left="0" top="43" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="60" useTextEdit="1" path="dma.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6" useTextEdit="1" path="main.c" left="0" selected="1" top="0" codecName="Default"/>
  </Files>
  <ARMCrossStudioWindow activeProject="serialtestcode" fileDialogDefaultFilter="*.c;*.h" autoConnectTarget="ST-LINK/V2-V3" buildConfiguration="THUMB Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/Unmanned Dynamics/serialtestcode" debugSearchPath="" autoConnectCapabilities="266111"/>

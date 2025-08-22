@@ -1,14 +1,5 @@
 #include "serial.h"
 
-//this file contains the serial processes
-
-/* defining a few preprocesses for now, must to in board file */
-
-#include "boardfile.h"
-#include "dma.h"
-#include <string.h>
-#include <stdlib.h>
-
 uint8_t findUartIndex(uint32_t UART){
   for(int uart_index = 0; uart_index < NUM_UARTS; uart_index++){
       if(UART == UARTS[uart_index])
@@ -17,8 +8,7 @@ uint8_t findUartIndex(uint32_t UART){
 
   return 0;
 }
-
-uint8_t uart2BufferRx[128], uart2BufferTx[128], uart1BufferRx[128], uart1BufferTx[128];
+               
 
 serialPort_t *serialOpen(USART_TypeDef *USARTx, uint32_t UART, uint32_t baud, uint16_t flowControl, uint8_t usageMethod, uint8_t dmaOutputUsage, serialRxCallBack_t* rxCallBack, uint8_t callbackParam){
 
@@ -37,21 +27,25 @@ serialPort_t *serialOpen(USART_TypeDef *USARTx, uint32_t UART, uint32_t baud, ui
 
     s->uartIndex = findUartIndex(UART);
 
-      s->txPin =  UART_TX_GPIO_PINS[s->uartIndex];
-      s->rxPin =  UART_RX_GPIO_PINS[s->uartIndex];
-      s->txPort = UART_TX_GPIO_PORTS[s->uartIndex];
-      s->rxPort = UART_RX_GPIO_PORTS[s->uartIndex];
-      s->afType = UART_GPIO_AF[s->uartIndex];
+    
+    s->uartBufferTx = UARTSTXBUFFER[s->uartIndex];
+    s->uartBufferRx = UARTSRXBUFFER[s->uartIndex];
+    s->txPin =  UART_TX_GPIO_PINS[s->uartIndex];
+    s->rxPin =  UART_RX_GPIO_PINS[s->uartIndex];
+    s->txPort = UART_TX_GPIO_PORTS[s->uartIndex];
+    s->rxPort = UART_RX_GPIO_PORTS[s->uartIndex];
+    s->afType = UART_GPIO_AF[s->uartIndex];
 
-      s->uartBufferRx = uart2BufferRx;
+
+      s->txDMAx = UART_TX_DMA_NUMBER[s->uartIndex];
+      s->txDMAStreamNumber= UART_TX_DMA_STREAM[s->uartIndex];
+      s->txDMAChannel = UART_TX_DMA_CHANNEL[s->uartIndex];
+
       s->rxDMAx = UART_RX_DMA_NUMBER[s->uartIndex];
       s->rxDMAStreamNumber= UART_RX_DMA_STREAM[s->uartIndex];
       s->rxDMAChannel = UART_RX_DMA_CHANNEL[s->uartIndex];
 
-      s->uartBufferTx = uart2BufferTx;
-      s->txDMAx = UART_TX_DMA_NUMBER[s->uartIndex];
-      s->txDMAStreamNumber= UART_TX_DMA_STREAM[s->uartIndex];
-      s->txDMAChannel = UART_TX_DMA_CHANNEL[s->uartIndex];
+
 
  //   if (USARTx == USART2){
  ////   RCC->APB1ENR |= RCC_APB1ENR_USART2EN; //turn on clock
@@ -99,7 +93,7 @@ serialPort_t *serialOpen(USART_TypeDef *USARTx, uint32_t UART, uint32_t baud, ui
     //DMA for sending data to uart - ENABLING TX DMA STREAM WHEN NDTR = 0 RAISES TEIF.
     LL_DMA_StructInit(&DMA_InitStruct); 
     DMA_InitStruct.PeriphOrM2MSrcAddress  = (uint32_t)&(USARTx->DR);
-    DMA_InitStruct.MemoryOrM2MDstAddress  = (uint32_t)&(uart2BufferTx[0]);
+    DMA_InitStruct.MemoryOrM2MDstAddress  = (uint32_t)(s->uartBufferTx);
     DMA_InitStruct.NbData                 = 0;
     DMA_InitStruct.PeriphOrM2MSrcIncMode  = LL_DMA_PERIPH_NOINCREMENT;
     DMA_InitStruct.MemoryOrM2MDstIncMode  = LL_DMA_MEMORY_INCREMENT;
@@ -107,12 +101,12 @@ serialPort_t *serialOpen(USART_TypeDef *USARTx, uint32_t UART, uint32_t baud, ui
     DMA_InitStruct.Mode                   = LL_DMA_MODE_NORMAL;
     DMA_InitStruct.Channel 		  = s->txDMAChannel;//changed DMA channel from hardcoded value to strucuture member
     LL_DMA_Init(s->txDMAx, s->txDMAStreamNumber, &DMA_InitStruct);
-  //  LL_DMA_EnableStream(s->txDMAx, s->txDMAStreamNumber);
+    //LL_DMA_EnableStream(s->txDMAx, s->txDMAStreamNumber);
 
     //DMA for receiving Data from uart
     LL_DMA_StructInit(&DMA_InitStruct);
     DMA_InitStruct.PeriphOrM2MSrcAddress  = (uint32_t)&USARTx->DR;
-    DMA_InitStruct.MemoryOrM2MDstAddress  = (uint32_t)&(uart2BufferRx[0]);//(uint32_t)(uart_buffer_rx);
+    DMA_InitStruct.MemoryOrM2MDstAddress  = (uint32_t)(s->uartBufferRx);
     DMA_InitStruct.NbData                 = UART_BUFFER_RX_SIZE;
     DMA_InitStruct.PeriphOrM2MSrcIncMode  = LL_DMA_PERIPH_NOINCREMENT;
     DMA_InitStruct.MemoryOrM2MDstIncMode  = LL_DMA_MEMORY_INCREMENT;
